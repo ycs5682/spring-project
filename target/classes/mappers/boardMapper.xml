@@ -3,9 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardMapper">
+
 	<!-- 게시글 작성 -->
 	<insert id="insert">
 		INSERT INTO MP_BOARD(BNO,TITLE,CONTENT,WRITER)
 		VALUES(MP_BOARD_SEQ.NEXTVAL,#{title},#{content},#{writer})
 	</insert>
+
+	<select id="list" resultType="kr.co.vo.BoardVO">
+		SELECT   BNO
+			   , TITLE
+			   , WRITER
+			   , REGDATE
+		  FROM MP_BOARD
+		  ORDER BY BNO DESC
+	</select>
+
+	<select id="read" parameterType="int" resultType="kr.co.vo.BoardVO">
+		SELECT	BNO
+			  , TITLE
+			  , CONTENT
+			  , WRITER
+			  , REGDATE
+		 FROM MP_BOARD
+		 WHERE BNO = #{bno}
+	</select>
+
 </mapper>

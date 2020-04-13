@@ -18,4 +18,15 @@
 		  FROM MP_BOARD
 		  ORDER BY BNO DESC
 	</select>
+
+	<select id="read" parameterType="int" resultType="kr.co.vo.BoardVO">
+		SELECT	BNO
+			  , TITLE
+			  , CONTENT
+			  , WRITER
+			  , REGDATE
+		 FROM MP_BOARD
+		 WHERE BNO = #{bno}
+	</select>
+
 </mapper>
