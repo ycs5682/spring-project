@@ -29,4 +29,17 @@
 		 WHERE BNO = #{bno}
 	</select>
 
+	<update id="update" parameterType="kr.co.vo.BoardVO">
+		UPDATE MP_BOARD
+			SET TITLE = #{title},
+					CONTENT = #{content}
+			WHERE BNO = #{bno}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE
+			FROM MP_BOARD
+		WHERE BNO = #{bno}
+	</delete>
+
 </mapper>
