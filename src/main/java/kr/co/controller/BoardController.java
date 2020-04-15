@@ -22,13 +22,13 @@ public class BoardController {
 	BoardService service;
 
 	// 게시판 글 작성 화면
-	@RequestMapping(value = "/board/writeView", method = RequestMethod.GET)
+	@RequestMapping(value = "writeView", method = RequestMethod.GET)
 	public void writeView() throws Exception {
 		logger.info("writeView");
 	}
 
 	// 게시판 글 작성
-	@RequestMapping(value = "/board/write", method = RequestMethod.POST)
+	@RequestMapping(value = "write", method = RequestMethod.POST)
 	public String write(BoardVO boardVO) throws Exception {
 		logger.info("write");
 		service.write(boardVO);
