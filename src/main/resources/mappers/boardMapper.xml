@@ -10,12 +10,27 @@
 		VALUES(MP_BOARD_SEQ.NEXTVAL,#{title},#{content},#{writer})
 	</insert>
 
-	<select id="list" resultType="kr.co.vo.BoardVO">
-		SELECT   BNO
+	<select id="listCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(BNO)
+			FROM MP_BOARD
+			WHERE BNO > 0
+		]]>
+	</select>
+	<select id="listPage" resultType="kr.co.vo.BoardVO">
+		SELECT BNO
 			   , TITLE
 			   , WRITER
 			   , REGDATE
-		  FROM MP_BOARD
+			FROM(
+						SELECT BNO,
+							 TITLE,
+							 WRITER,
+							 REGDATE,
+							 ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+		  			FROM MP_BOARD
+		  											) MP
+		  WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		  ORDER BY BNO DESC
 	</select>
 
